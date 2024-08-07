@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "CleanCode.Test": {
+      "commandName": "Project"
+    }
+  }
+}

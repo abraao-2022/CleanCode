@@ -11,7 +11,7 @@ public class Order
 
     public Cpf Cpf { get; set; }
     public Coupon? Coupon { get; set; }
-    public List<OrderItem> OrderItems { get; set; } =  new();
+    public List<OrderItem> OrderItems { get; set; } = new();
 
     public void AddItem(Item item, int quantity)
     {
@@ -20,7 +20,10 @@ public class Order
 
     public void AddCoupon(Coupon coupon)
     {
-        Coupon = coupon;
+        if (coupon.IsValid())
+        {
+            Coupon = coupon;
+        }
     }
 
     public int GetTotal()

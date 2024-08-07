@@ -2,6 +2,13 @@
 
 public class Coupon
 {
+    public Coupon(string code, int percentage, DateTime expireDate)
+    {
+        Code = code;
+        Percentage = percentage;
+        ExpireDate = expireDate;
+    }
+
     public Coupon(string code, int percentage)
     {
         Code = code;
@@ -10,4 +17,20 @@ public class Coupon
 
     public string Code { get; set; }
     public int Percentage { get; set; }
+    public DateTime ExpireDate { get; set; }
+
+    public bool IsValid(DateTime date = default)
+    {
+        if(ExpireDate == new DateTime()) return true;
+
+        var isDefaultDate = date == default;
+        var today = isDefaultDate ? new DateTime(2024, 08, 07) : date;
+        return ExpireDate >= today;
+        
+    }
+
+    public bool IsExpired(DateTime date = default)
+    {
+        return !IsValid(date);
+    }
 }

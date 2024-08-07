@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Test", "test\Clea
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CF7513EE-47F1-44CB-887B-7B3B82B8DD37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCode.Domain", "src\CleanCode.Domain\CleanCode.Domain.csproj", "{DB421AEB-86C2-47A2-822F-E1C455816EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanCode.Domain", "src\CleanCode.Domain\CleanCode.Domain.csproj", "{DB421AEB-86C2-47A2-822F-E1C455816EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -61,4 +61,18 @@ public class OrderTest
 
         Assert.AreEqual(128, total);
     }
+
+    [TestMethod]
+    public void Deveria_Criar_Um_Pedido_Com_Cupom_De_Desconto_Expirado()
+    {
+        var cpf = "839.435.452-10";
+        var order = new Order(cpf);
+        order.AddItem(CD, 3);
+        order.AddItem(DVD, 1);
+        order.AddItem(VHS, 2);
+        order.AddCoupon(new Coupon("VALE20", 20, new DateTime(2024, 08, 01)));
+        var total = order.GetTotal();
+
+        Assert.AreEqual(160, total);
+    }
 }
