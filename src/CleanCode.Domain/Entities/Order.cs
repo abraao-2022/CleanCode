@@ -4,33 +4,53 @@ namespace CleanCode.Domain.Entities;
 
 public class Order
 {
+    public Order(string cpf, DateTime date)
+    {
+        Cpf = new Cpf(cpf);
+        Date = date;
+    }
+
     public Order(string cpf)
     {
         Cpf = new Cpf(cpf);
+        Date = new DateTime(2024, 08, 07);
     }
 
     public Cpf Cpf { get; set; }
     public Coupon? Coupon { get; set; }
     public List<OrderItem> OrderItems { get; set; } = new();
+    public DateTime Date { get; set; }
+    private double Freight { get; set; }
 
     public void AddItem(Item item, int quantity)
     {
+        if (item.Width != 0 && item.Weight != 0 && item.Height != 0 && item.Length != 0)
+        {
+            double volume = (item.Width / 100) * (item.Height / 100) * (item.Length / 100);
+            double density = item.Height / volume;
+            Freight += (1000 * volume * (density / 100)) * quantity;
+        }
         OrderItems.Add(new OrderItem(item.IdItem, item.Price, quantity));
     }
 
     public void AddCoupon(Coupon coupon)
     {
-        if (coupon.IsValid())
+        if (coupon.IsValid(Date))
         {
             Coupon = coupon;
         }
     }
 
-    public int GetTotal()
+    public double GetFreight()
+    {
+        return Freight;
+    }
+
+    public double GetTotal()
     {
         if (OrderItems.Count < 1) return 0;
 
-        var total = 0;
+        double total = 0;
         foreach (var orderItem in OrderItems)
         {
             total += orderItem.GetTotal();
@@ -38,7 +58,7 @@ public class Order
 
         if (Coupon != null)
         {
-            total -= (total * Coupon.Percentage) / 100;
+            total -= Coupon.CalculateDiscount(total, Date);
         }
 
         return total;

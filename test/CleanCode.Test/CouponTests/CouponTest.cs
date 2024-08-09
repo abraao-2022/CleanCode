@@ -24,4 +24,13 @@ public class CouponTest
 
         Assert.IsTrue(isExpired);
     }
+
+    [TestMethod]
+    public void Deve_Criar_Um_Cupom_De_Desconto_Valido_E_Calcular_O_Desconto()
+    {
+        var coupon = new Coupon("VALE20", 20, new DateTime(2024, 08, 08));
+        var discount = coupon.CalculateDiscount(1000, new DateTime(2024, 08, 07));
+
+        Assert.AreEqual( 200, discount);
+    }
 }

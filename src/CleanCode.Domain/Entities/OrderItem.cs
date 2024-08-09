@@ -2,7 +2,7 @@
 
 public class OrderItem
 {
-    public OrderItem(int idItem, int price, int quantity)
+    public OrderItem(int idItem, double price, double quantity)
     {
         IdItem = idItem;
         Price = price;
@@ -10,10 +10,10 @@ public class OrderItem
     }
 
     public int IdItem { get; set; }
-    public int Price { get; set; }
-    public int Quantity { get; set; }
+    public double Price { get; set; }
+    public double Quantity { get; set; }
 
-    public int GetTotal()
+    public double GetTotal()
     {
         return Price * Quantity;
     }

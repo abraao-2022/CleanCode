@@ -33,4 +33,10 @@ public class Coupon
     {
         return !IsValid(date);
     }
+
+    public double CalculateDiscount(double amount, DateTime date)
+    {
+        if (IsExpired(date)) return 0;
+        return (amount * Percentage) / 100;
+    }
 }
