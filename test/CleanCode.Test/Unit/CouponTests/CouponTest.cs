@@ -1,6 +1,6 @@
 ﻿using CleanCode.Domain.Entities;
 
-namespace CleanCode.Test.CouponTests;
+namespace CleanCode.Test.Unit.CouponTests;
 
 [TestClass]
 public class CouponTest
@@ -31,6 +31,6 @@ public class CouponTest
         var coupon = new Coupon("VALE20", 20, new DateTime(2024, 08, 08));
         var discount = coupon.CalculateDiscount(1000, new DateTime(2024, 08, 07));
 
-        Assert.AreEqual( 200, discount);
+        Assert.AreEqual(200, discount);
     }
 }

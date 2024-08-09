@@ -1,6 +1,7 @@
 ﻿using CleanCode.Domain.Entities;
+using CleanCode.Domain.Utils;
 
-namespace CleanCode.Test.OrderTests;
+namespace CleanCode.Test.Unit.OrderTests;
 
 [TestClass]
 public class OrderTest
@@ -83,12 +84,25 @@ public class OrderTest
     public void Deveria_Criar_Um_Pedido_Com_3_Itens_Com_Calculo_Do_Frete()
     {
         var cpf = "839.435.452-10";
-        var order = new Order(cpf);
+        var order = new Order(cpf, new DateTime(2024, 08, 07), new DefaultFreightCalculator());
         order.AddItem(Guitarra, 1);
         order.AddItem(Amplificador, 1);
         order.AddItem(Cabo, 3);
         var freight = order.GetFreight();
 
         Assert.AreEqual(260, freight);
+    }
+
+    [TestMethod]
+    public void Deveria_Criar_Um_Pedido_Com_3_Itens_Com_Estratégia_De_Frete_Fixo()
+    {
+        var cpf = "839.435.452-10";
+        var order = new Order(cpf, new FixedFreightCalculator());
+        order.AddItem(Guitarra, 1);
+        order.AddItem(Amplificador, 1);
+        order.AddItem(Cabo, 3);
+        var freight = order.GetFreight();
+
+        Assert.AreEqual(50, freight);
     }
 }

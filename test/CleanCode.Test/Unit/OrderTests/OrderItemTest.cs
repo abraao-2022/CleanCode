@@ -1,7 +1,6 @@
-﻿
-using CleanCode.Domain.Entities;
+﻿using CleanCode.Domain.Entities;
 
-namespace CleanCode.Test.OrderTests;
+namespace CleanCode.Test.Unit.OrderTests;
 
 [TestClass]
 public class OrderItemTest

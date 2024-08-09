@@ -31,4 +31,21 @@ public class Item
     public double Height { get; set; } = 0;
     public double Length { get; set; } = 0;
     public double Weight { get; set; } = 0;
+
+    public double GetVolume()
+    {
+        return Width / 100 * Height / 100 * Length / 100;
+    }
+
+    public double GetDensity()
+    {
+        return Weight / GetVolume();
+    }
+
+    public double CalculateFreight()
+    {
+        var freight =  1000 * GetVolume() * (GetDensity() / 100);
+        var minFreight = 10;
+        return Math.Max(minFreight, freight);
+    }
 }
