@@ -63,6 +63,8 @@ public class Order
             total -= Coupon.CalculateDiscount(total, Date);
         }
 
+        total += GetFreight();
+
         return total;
     }
 }
