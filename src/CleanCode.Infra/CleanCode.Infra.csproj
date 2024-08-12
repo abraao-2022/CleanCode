@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CleanCode.Domain\CleanCode.Domain.csproj" />
+    <ProjectReference Include="..\CleanCode.Domain\CleanCode.Domain.csproj" />
   </ItemGroup>
 
 </Project>

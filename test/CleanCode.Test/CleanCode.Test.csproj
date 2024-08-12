@@ -17,13 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <ProjectReference Include="..\..\src\CleanCode.Application\CleanCode.Application.csproj" />
+    <ProjectReference Include="..\..\src\CleanCode.Domain\CleanCode.Domain.csproj" />
+    <ProjectReference Include="..\..\src\CleanCode.Infra\CleanCode.Infra.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CleanCode.Application\CleanCode.Application.csproj" />
-    <ProjectReference Include="..\..\CleanCode.Infra\CleanCode.Infra.csproj" />
-    <ProjectReference Include="..\..\src\CleanCode.Domain\CleanCode.Domain.csproj" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
 </Project>
