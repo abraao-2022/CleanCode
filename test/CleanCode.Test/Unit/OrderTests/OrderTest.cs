@@ -105,4 +105,17 @@ public class OrderTest
 
         Assert.AreEqual(50, freight);
     }
+
+    [TestMethod]
+    public void Deveria_Criar_Um_Pedido_Com_Codigo()
+    {
+        var cpf = "839.435.452-10";
+        var order = new Order(cpf, new FixedFreightCalculator());
+        order.AddItem(Guitarra, 1);
+        order.AddItem(Amplificador, 1);
+        order.AddItem(Cabo, 3);
+        var code = order.GetCode();
+
+        Assert.AreEqual("202400000001", code);
+    }
 }

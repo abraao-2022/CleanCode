@@ -5,18 +5,20 @@ namespace CleanCode.Domain.Entities;
 
 public class Order
 {
-    public Order(string cpf, DateTime date, IFreightCalculator? freightCalculator = null)
+    public Order(string cpf, DateTime date, IFreightCalculator? freightCalculator = null, int sequence = 1)
     {
         Cpf = new Cpf(cpf);
         Date = date;
         FreightCalculator = freightCalculator ?? new DefaultFreightCalculator();
+        Code = new OrderCode(Date, sequence);
     }
 
-    public Order(string cpf, IFreightCalculator? freightCalculator = null)
+    public Order(string cpf, IFreightCalculator? freightCalculator = null, int sequence = 1)
     {
         Cpf = new Cpf(cpf);
         Date = new DateTime(2024, 08, 07);
         FreightCalculator = freightCalculator ?? new DefaultFreightCalculator();
+        Code = new OrderCode(Date, sequence);
     }
 
     public Cpf Cpf { get; set; }
@@ -25,6 +27,7 @@ public class Order
     public DateTime Date { get; set; }
     private double Freight { get; set; }
     private IFreightCalculator FreightCalculator { get; set; }
+    private OrderCode Code { get; set; }
 
     public void AddItem(Item item, int quantity)
     {
@@ -46,6 +49,11 @@ public class Order
     public double GetFreight()
     {
         return Freight;
+    }
+
+    public string GetCode()
+    {
+        return Code.Value;
     }
 
     public double GetTotal()

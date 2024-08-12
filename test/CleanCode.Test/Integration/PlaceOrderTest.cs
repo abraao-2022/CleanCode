@@ -51,4 +51,24 @@ public class PlaceOrderTest
         var output = await placeOrder.Execute(input);
         Assert.AreEqual(6350, output.Total);
     }
+
+    [TestMethod]
+    public async Task Deve_Fazer_Um_Pedido_Com_Codigo()
+    {
+        var placeOrder = new PlaceOrder(_itemRepository, _orderRepository, _couponRepository);
+        var input = new PlaceOrderInput
+        {
+            Cpf = "839.435.452-10",
+            OrderItems = new List<OrderItemInput>
+            {
+                new OrderItemInput{IdItem = 4, Quantity = 1},
+                new OrderItemInput{IdItem = 5, Quantity = 1},
+                new OrderItemInput{IdItem = 6, Quantity = 3},
+            },
+            Date = new DateTime(2024, 08, 07)
+
+        };
+        var output = await placeOrder.Execute(input);
+        Assert.AreEqual("202400000001", output.Code);
+    }
 }

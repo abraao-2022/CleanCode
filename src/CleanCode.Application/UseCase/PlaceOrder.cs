@@ -1,5 +1,6 @@
 ﻿using CleanCode.Domain.Entities;
 using CleanCode.Domain.Repositories;
+using CleanCode.Domain.Utils;
 
 namespace CleanCode.Application.UseCase;
 
@@ -18,7 +19,8 @@ public class PlaceOrder
 
     public async Task<PlaceOrderOutput> Execute(PlaceOrderInput input)
     {
-        var order = new Order(input.Cpf, input.Date);
+        var sequence = await _orderRepository.Count() + 1;
+        var order = new Order(input.Cpf, input.Date, new DefaultFreightCalculator(), sequence);
         foreach (var orderItem in input.OrderItems)
         {
             var item = await _itemRepository.FindById(orderItem.IdItem) 
@@ -34,7 +36,7 @@ public class PlaceOrder
 
         await _orderRepository.Add(order);
         var total = order.GetTotal();
-        var output = new PlaceOrderOutput(total);
+        var output = new PlaceOrderOutput(order.GetCode(), total);
         return output;
     }
 }

@@ -11,4 +11,9 @@ public class OrderRepositoryMemory : IOrderRepository
     {
         Orders.Add(order);
     }
+
+    public async Task<int> Count()
+    {
+        return Orders.Count();
+    }
 }
