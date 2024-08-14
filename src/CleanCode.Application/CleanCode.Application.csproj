@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CleanCode.Domain\CleanCode.Domain.csproj" />
     <ProjectReference Include="..\CleanCode.Infra\CleanCode.Infra.csproj" />
   </ItemGroup>

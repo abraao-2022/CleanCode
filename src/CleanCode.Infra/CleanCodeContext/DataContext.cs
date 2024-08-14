@@ -9,6 +9,9 @@ public class DataContext : DbContext
     {
     }
 
+    public DbSet<Item> Items{ get; set; }
+    //public DbSet<Coupon> Coupons{ get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

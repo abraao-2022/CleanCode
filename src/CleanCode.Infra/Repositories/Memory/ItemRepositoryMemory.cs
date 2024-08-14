@@ -15,6 +15,16 @@ public class ItemRepositoryMemory : IItemRepository
         new Item(6, "Acessórios", "Cabo", 30, 10, 10, 10, 0.9)
 };
 
+    public Task Add(Item item)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Item>> FindAll()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Item> FindById(int idItem)
     {
         return Items.FirstOrDefault(item => item.IdItem == idItem) 
