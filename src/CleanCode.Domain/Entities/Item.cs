@@ -2,6 +2,9 @@
 
 public class Item
 {
+    public Item()
+    {
+    }
     public Item(int idItem, string category, string description, int price)
     {
         IdItem = idItem;
