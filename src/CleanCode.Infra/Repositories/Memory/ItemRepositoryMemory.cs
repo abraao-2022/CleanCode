@@ -15,17 +15,17 @@ public class ItemRepositoryMemory : IItemRepository
         new Item(6, "Acessórios", "Cabo", 30, 10, 10, 10, 0.9)
 };
 
-    public Task Add(Item item)
+    public Task AddAsync(Item item)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Item>> FindAll()
+    public Task<List<Item>> FindAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Item> FindById(int idItem)
+    public async Task<Item> FindByIdAsync(int idItem)
     {
         return Items.FirstOrDefault(item => item.IdItem == idItem) 
             ?? throw new Exception("item not found");

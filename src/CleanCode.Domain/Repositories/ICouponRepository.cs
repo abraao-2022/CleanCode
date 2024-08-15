@@ -4,5 +4,6 @@ namespace CleanCode.Domain.Repositories;
 
 public interface ICouponRepository
 {
-    Task<Coupon> FindByCode(string code);
+    Task<Coupon> FindByCodeAsync(string code);
+    Task AddAsync(Coupon coupon);
 }

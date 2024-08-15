@@ -4,7 +4,7 @@ namespace CleanCode.Domain.Repositories;
 
 public interface IItemRepository
 {
-    Task<List<Item>> FindAll();
-    Task<Item> FindById(int idItem);
-    Task Add(Item item);
+    Task<List<Item>> FindAllAsync();
+    Task<Item> FindByIdAsync(int idItem);
+    Task AddAsync(Item item);
 }

@@ -1,4 +1,5 @@
 ﻿using CleanCode.Application.UseCase;
+using CleanCode.Application.UseCase.PlaceOrder;
 using CleanCode.Domain.Repositories;
 using CleanCode.Infra.Repositories.Memory;
 
@@ -7,9 +8,15 @@ namespace CleanCode.Test.Integration;
 [TestClass]
 public class PlaceOrderTest
 {
+    
     private readonly IItemRepository _itemRepository = new ItemRepositoryMemory();
     private readonly IOrderRepository _orderRepository = new OrderRepositoryMemory();
-    private readonly ICouponRepository _couponRepository = new CouponRepositoryMemory();
+    private readonly ICouponRepository _couponRepository;
+
+    public PlaceOrderTest()
+    {
+        _couponRepository = new CouponRepositoryMemory();
+    }
 
     [TestMethod]
     public async Task Deve_Fazer_Um_Pedido()

@@ -11,11 +11,13 @@ namespace CleanCode.Application.Controllers;
 public class ItemsController : ControllerBase
 {
     private readonly IItemRepository _itemRepository;
+    private readonly ICouponRepository _couponRepository;
     private readonly DataContext _context;
-    public ItemsController(IItemRepository itemRepository, DataContext context)
+    public ItemsController(IItemRepository itemRepository, DataContext context, ICouponRepository couponRepository)
     {
         _itemRepository = itemRepository;
         _context = context;
+        _couponRepository = couponRepository;
     }
 
     [HttpGet]

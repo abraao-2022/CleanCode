@@ -9,7 +9,13 @@ public class CouponRepositoryMemory : ICouponRepository
     {
         new Coupon("VALE20", 20)
     };
-    public async Task<Coupon> FindByCode(string code)
+
+    public Task AddAsync(Coupon coupon)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Coupon> FindByCodeAsync(string code)
     {
         return Coupons.FirstOrDefault(coupon => coupon.Code == code)
             ?? throw new Exception("coupon not found");

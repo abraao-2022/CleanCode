@@ -7,12 +7,12 @@ public class OrderRepositoryMemory : IOrderRepository
 {
     public List<Order> Orders { get; set; } = new();
 
-    public async Task Add(Order order)
+    public async Task AddAsync(Order order)
     {
         Orders.Add(order);
     }
 
-    public async Task<int> Count()
+    public async Task<int> CountAsync()
     {
         return Orders.Count();
     }
