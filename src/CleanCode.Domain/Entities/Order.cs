@@ -5,6 +5,10 @@ namespace CleanCode.Domain.Entities;
 
 public class Order
 {
+    public Order()
+    {
+    }
+
     public Order(string cpf, DateTime date, IFreightCalculator? freightCalculator = null, int sequence = 1)
     {
         Cpf = new Cpf(cpf);
@@ -21,13 +25,16 @@ public class Order
         Code = new OrderCode(Date, sequence);
     }
 
+    public string? IdOrder { get; set; }
     public Cpf Cpf { get; set; }
     public Coupon? Coupon { get; set; }
-    private List<OrderItem> OrderItems { get; set; } = new();
+    public string? CouponCode { get; set; }
+    public List<OrderItem> OrderItems { get; set; } = new();
     public DateTime Date { get; set; }
-    private double Freight { get; set; }
-    private IFreightCalculator FreightCalculator { get; set; }
-    private OrderCode Code { get; set; }
+    public double Freight { get; set; }
+    public IFreightCalculator? FreightCalculator { get; set; } = new DefaultFreightCalculator();
+    public OrderCode Code { get; set; }
+    public int Sequence { get; set; }
 
     public void AddItem(Item item, int quantity)
     {
@@ -43,6 +50,7 @@ public class Order
         if (coupon.IsValid(Date))
         {
             Coupon = coupon;
+            CouponCode = coupon.Code;
         }
     }
 

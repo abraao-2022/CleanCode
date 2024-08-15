@@ -2,6 +2,10 @@
 
 public class OrderCode
 {
+    public OrderCode()
+    {
+    }
+
     public OrderCode(DateTime date, int sequence)
     {
         Value = GenerateCode(date, sequence);

@@ -9,8 +9,10 @@ public class DataContext : DbContext
     {
     }
 
-    public DbSet<Item> Items{ get; set; }
-    //public DbSet<Coupon> Coupons{ get; set; }
+    public DbSet<Item> Items { get; set; }
+    public DbSet<Coupon> Coupons { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -26,20 +28,32 @@ public class DataContext : DbContext
         builder.Entity<Item>().Property(i => i.Length).HasColumnName("length");
         builder.Entity<Item>().Property(i => i.Weight).HasColumnName("weight");
 
-        //builder.Entity<Order>().ToTable("order");
-        //builder.Entity<Order>().Property(o => o.Coupon.Code).HasColumnName("coupon_code");
-        //builder.Entity<Order>().Property(o => o.Cpf.Value).HasColumnName("cpf");
-        //builder.Entity<Order>().Property(o => o.Date).HasColumnName("date");
-        //builder.Entity<Order>().Property(o => o.GetFreight()).HasColumnName("freight");
+        builder.Entity<Coupon>().ToTable("coupons");
+        builder.Entity<Coupon>().HasKey(i => i.Code).HasName("code");
+        builder.Entity<Coupon>().Property(i => i.Percentage).HasColumnName("percentage");
+        builder.Entity<Coupon>().Property(i => i.ExpireDate).HasColumnName("expire_date");
 
-        //builder.Entity<OrderItem>().ToTable("orderItem");
-        //builder.Entity<OrderItem>().Property(i => i.IdItem).HasColumnName("id_item");
-        //builder.Entity<OrderItem>().Property(i => i.Price).HasColumnName("price");
-        //builder.Entity<OrderItem>().Property(i => i.Quantity).HasColumnName("quantity");
+        builder.Entity<Order>().ToTable("orders");
+        builder.Entity<Order>().HasKey(x => x.IdOrder).HasName("id_order");
+        builder.Entity<Order>().Property(o => o.CouponCode).HasColumnName("coupon_code");
+        builder.Entity<Order>().OwnsOne(o => o.Code, code =>
+        {
+            code.Property(c => c.Value).HasColumnName("code");
+        });
 
-        //builder.Entity<Coupon>().ToTable("coupon");
-        //builder.Entity<Coupon>().Property(i => i.Code).HasColumnName("code");
-        //builder.Entity<Coupon>().Property(i => i.Percentage).HasColumnName("percentage");
-        //builder.Entity<Coupon>().Property(i => i.ExpireDate).HasColumnName("expire_date");
+        builder.Entity<Order>().OwnsOne(o => o.Cpf, cpf =>
+        {
+            cpf.Property(c => c.Value).HasColumnName("cpf");
+        });
+        builder.Entity<Order>().Property(o => o.Date).HasColumnName("issue_date");
+        builder.Entity<Order>().Property(o => o.Freight).HasColumnName("freight");
+        builder.Entity<Order>().Property(o => o.Sequence).HasColumnName("sequence");
+        builder.Entity<Order>().Ignore(o => o.FreightCalculator);
+
+        builder.Entity<OrderItem>().ToTable("orderItems");
+        builder.Entity<OrderItem>().HasKey(i => i.IdOrderItem).HasName("id_order_item");
+        builder.Entity<OrderItem>().Property(i => i.IdItem).HasColumnName("id_item");
+        builder.Entity<OrderItem>().Property(i => i.Price).HasColumnName("price");
+        builder.Entity<OrderItem>().Property(i => i.Quantity).HasColumnName("quantity");
     }
 }

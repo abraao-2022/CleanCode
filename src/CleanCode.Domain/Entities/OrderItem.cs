@@ -2,6 +2,10 @@
 
 public class OrderItem
 {
+    public OrderItem()
+    {
+    }
+
     public OrderItem(int idItem, double price, double quantity)
     {
         IdItem = idItem;
@@ -9,6 +13,7 @@ public class OrderItem
         Quantity = quantity;
     }
 
+    public int IdOrderItem { get; set; }
     public int IdItem { get; set; }
     public double Price { get; set; }
     public double Quantity { get; set; }

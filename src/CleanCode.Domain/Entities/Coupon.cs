@@ -21,12 +21,12 @@ public class Coupon
 
     public bool IsValid(DateTime date = default)
     {
-        if(ExpireDate == new DateTime()) return true;
+        if (ExpireDate == new DateTime()) return true;
 
         var isDefaultDate = date == default;
         var today = isDefaultDate ? new DateTime(2024, 08, 07) : date;
         return ExpireDate >= today;
-        
+
     }
 
     public bool IsExpired(DateTime date = default)

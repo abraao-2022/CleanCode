@@ -47,7 +47,7 @@ public class Item
 
     public double CalculateFreight()
     {
-        var freight =  1000 * GetVolume() * (GetDensity() / 100);
+        var freight = 1000 * GetVolume() * (GetDensity() / 100);
         var minFreight = 10;
         return Math.Max(minFreight, freight);
     }

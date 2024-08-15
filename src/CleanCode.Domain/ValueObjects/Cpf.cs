@@ -2,6 +2,10 @@
 
 public class Cpf
 {
+    public Cpf()
+    {
+    }
+
     public Cpf(string value)
     {
         if (!IsCpf(value)) throw new ArgumentException("Cpf Inválido");
