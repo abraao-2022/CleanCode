@@ -1,4 +1,5 @@
 ﻿using CleanCode.Domain.Entities;
+using CleanCode.Domain.Factory;
 using CleanCode.Domain.Repositories;
 using CleanCode.Domain.Utils;
 
@@ -9,12 +10,14 @@ public class PlaceOrder
     private readonly IItemRepository _itemRepository;
     private readonly IOrderRepository _orderRepository;
     private readonly ICouponRepository _couponRepository;
+    private readonly IRepositoryFactory _repositoryFactory;
 
-    public PlaceOrder(IItemRepository itemRepository, IOrderRepository orderRepository, ICouponRepository couponRepository)
+    public PlaceOrder(IRepositoryFactory repositoryFactory)
     {
-        _itemRepository = itemRepository;
-        _orderRepository = orderRepository;
-        _couponRepository = couponRepository;
+        _repositoryFactory = repositoryFactory;
+        _itemRepository = repositoryFactory.CreateItemRepository();
+        _orderRepository = repositoryFactory.CreateOrderRepository();
+        _couponRepository = repositoryFactory.CreateCouponRepository();
     }
 
     public async Task<PlaceOrderOutput> Execute(PlaceOrderInput input)

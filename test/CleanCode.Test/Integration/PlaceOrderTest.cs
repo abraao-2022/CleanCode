@@ -1,6 +1,8 @@
 ﻿using CleanCode.Application.UseCase;
 using CleanCode.Application.UseCase.PlaceOrder;
+using CleanCode.Domain.Factory;
 using CleanCode.Domain.Repositories;
+using CleanCode.Infra.Factory;
 using CleanCode.Infra.Repositories.Memory;
 
 namespace CleanCode.Test.Integration;
@@ -8,20 +10,12 @@ namespace CleanCode.Test.Integration;
 [TestClass]
 public class PlaceOrderTest
 {
-    
-    private readonly IItemRepository _itemRepository = new ItemRepositoryMemory();
-    private readonly IOrderRepository _orderRepository = new OrderRepositoryMemory();
-    private readonly ICouponRepository _couponRepository;
-
-    public PlaceOrderTest()
-    {
-        _couponRepository = new CouponRepositoryMemory();
-    }
+    private readonly IRepositoryFactory _repositoryFactory = new MemoryRepositoryFactory();
 
     [TestMethod]
     public async Task Deve_Fazer_Um_Pedido()
     {
-        var placeOrder = new PlaceOrder(_itemRepository, _orderRepository, _couponRepository);
+        var placeOrder = new PlaceOrder(_repositoryFactory);
         var input = new PlaceOrderInput
         {
             Cpf = "839.435.452-10",
@@ -42,7 +36,7 @@ public class PlaceOrderTest
     [TestMethod]
     public async Task Deve_Fazer_Um_Pedido_Com_Calculo_De_Frete()
     {
-        var placeOrder = new PlaceOrder(_itemRepository, _orderRepository, _couponRepository);
+        var placeOrder = new PlaceOrder(_repositoryFactory);
         var input = new PlaceOrderInput
         {
             Cpf = "839.435.452-10",
@@ -62,7 +56,7 @@ public class PlaceOrderTest
     [TestMethod]
     public async Task Deve_Fazer_Um_Pedido_Com_Codigo()
     {
-        var placeOrder = new PlaceOrder(_itemRepository, _orderRepository, _couponRepository);
+        var placeOrder = new PlaceOrder(_repositoryFactory);
         var input = new PlaceOrderInput
         {
             Cpf = "839.435.452-10",
