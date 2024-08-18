@@ -1,5 +1,6 @@
 ﻿using CleanCode.Application.UseCase;
 using CleanCode.Application.UseCase.PlaceOrder;
+using CleanCode.Application.UseCase.SimulateFreight;
 using System.Net.Http;
 using System.Text.Json;
 
@@ -15,7 +16,8 @@ public class ApiTest
     }
 
     [TestMethod]
-    public async Task Deve_Testar_A_Api()
+    [Ignore]
+    public async Task Deve_Testar_A_Api_ORDERS_POST()
     {
         var input = new PlaceOrderInput
         {
@@ -34,6 +36,26 @@ public class ApiTest
         var jsonAsString = await httpResponse.Content.ReadAsStringAsync();
         var response = JsonSerializer.Deserialize<PlaceOrderOutput>(jsonAsString);
 
-        Assert.AreEqual("202400000003", response.Code);
+        Assert.AreEqual(138, response.Total);
+    }
+    
+    [TestMethod]
+    [Ignore]
+    public async Task Deve_Testar_A_Api_SIMULATE_FREIGHT_POST()
+    {
+        var input = new SimulateFreightInput
+        {
+            Items = new List<OrderItemInput>
+            {
+                new() { IdItem = 4, Quantity = 1},
+                new() { IdItem = 5, Quantity = 1},
+                new() { IdItem = 6, Quantity = 3},
+            }
+        };
+        var httpResponse = await _httpClient.PostAsJsonAsync("http://localhost:5182/api/freights/simulateFreight", input);
+        var jsonAsString = await httpResponse.Content.ReadAsStringAsync();
+        var response = JsonSerializer.Deserialize<SimulateFreightOutput>(jsonAsString);
+
+        Assert.AreEqual(260, response.Amount);
     }
 }

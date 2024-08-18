@@ -26,4 +26,9 @@ public class OrderRepository : IOrderRepository
     {
         return await _context.Orders.CountAsync();
     }
+
+    public async Task<Order> GetByCodeAsync(string code)
+    {
+        return await _context.Orders.FirstOrDefaultAsync(x => x.OrderCode.Value == code);
+    }
 }

@@ -16,4 +16,9 @@ public class OrderRepositoryMemory : IOrderRepository
     {
         return Orders.Count();
     }
+
+    public Task<Order> GetByCodeAsync(string code)
+    {
+        throw new NotImplementedException();
+    }
 }
