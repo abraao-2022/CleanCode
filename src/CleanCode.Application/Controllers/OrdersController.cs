@@ -16,9 +16,11 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> PlaceOrder()
+    public async Task<ActionResult> PlaceOrder(PlaceOrderInput input)
     {
         var placeOrder = new PlaceOrder(_repositoryFactory);
-        return Ok();
+        var output = await placeOrder.Execute(input);
+
+        return Ok(output);
     }
 }

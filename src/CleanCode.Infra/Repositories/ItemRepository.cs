@@ -27,9 +27,9 @@ public class ItemRepository : IItemRepository
         return await _context.Items.ToListAsync();
     }
 
-    public async Task<Item> FindByIdAsync(int idItem)
+    public async Task<Item> FindByIdAsync(int itemId)
     {
-        return await _context.Items.FirstOrDefaultAsync(x => x.IdItem == idItem) 
+        return await _context.Items.FirstOrDefaultAsync(x => x.Id == itemId) 
             ?? throw new Exception("item não encontrado");
     }
 }

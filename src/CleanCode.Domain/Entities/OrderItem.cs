@@ -6,15 +6,16 @@ public class OrderItem
     {
     }
 
-    public OrderItem(int idItem, double price, double quantity)
+    public OrderItem(int itemId, double price, double quantity)
     {
-        IdItem = idItem;
+        ItemId = itemId;
         Price = price;
         Quantity = quantity;
     }
 
-    public int IdOrderItem { get; set; }
-    public int IdItem { get; set; }
+    public int Id { get; set; }
+    public int ItemId { get; set; }
+    public int OrderId { get; set; }
     public double Price { get; set; }
     public double Quantity { get; set; }
 

@@ -14,7 +14,7 @@ public class Order
         Cpf = new Cpf(cpf);
         Date = date;
         FreightCalculator = freightCalculator ?? new DefaultFreightCalculator();
-        Code = new OrderCode(Date, sequence);
+        OrderCode = new OrderCode(Date, sequence);
     }
 
     public Order(string cpf, IFreightCalculator? freightCalculator = null, int sequence = 1)
@@ -22,10 +22,11 @@ public class Order
         Cpf = new Cpf(cpf);
         Date = new DateTime(2024, 08, 07);
         FreightCalculator = freightCalculator ?? new DefaultFreightCalculator();
-        Code = new OrderCode(Date, sequence);
+        OrderCode = new OrderCode(Date, sequence);
     }
 
-    public string? IdOrder { get; set; }
+    public int Id { get; set; }
+    //public string Code { get; set; }
     public Cpf Cpf { get; set; }
     public Coupon? Coupon { get; set; }
     public string? CouponCode { get; set; }
@@ -33,8 +34,8 @@ public class Order
     public DateTime Date { get; set; }
     public double Freight { get; set; }
     public IFreightCalculator? FreightCalculator { get; set; } = new DefaultFreightCalculator();
-    public OrderCode Code { get; set; }
-    public int Sequence { get; set; }
+    public OrderCode? OrderCode { get; set; }
+    public int Sequence { get; set; } = 1;
 
     public void AddItem(Item item, int quantity)
     {
@@ -42,7 +43,7 @@ public class Order
         {
             Freight += FreightCalculator.Calculate(item) * quantity;
         }
-        OrderItems.Add(new OrderItem(item.IdItem, item.Price, quantity));
+        OrderItems.Add(new OrderItem(item.Id, item.Price, quantity));
     }
 
     public void AddCoupon(Coupon coupon)
@@ -61,7 +62,7 @@ public class Order
 
     public string GetCode()
     {
-        return Code.Value;
+        return OrderCode.Value;
     }
 
     public double GetTotal()

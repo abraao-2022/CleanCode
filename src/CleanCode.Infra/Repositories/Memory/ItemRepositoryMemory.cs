@@ -25,9 +25,9 @@ public class ItemRepositoryMemory : IItemRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Item> FindByIdAsync(int idItem)
+    public async Task<Item> FindByIdAsync(int id)
     {
-        return Items.FirstOrDefault(item => item.IdItem == idItem) 
+        return Items.FirstOrDefault(item => item.Id == id) 
             ?? throw new Exception("item not found");
     }
 }

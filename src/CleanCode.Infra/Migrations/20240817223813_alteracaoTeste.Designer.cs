@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanCode.Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240815172256_novasTabelas")]
-    partial class novasTabelas
+    [Migration("20240817223813_alteracaoTeste")]
+    partial class alteracaoTeste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace CleanCode.Infra.Migrations
 
             modelBuilder.Entity("CleanCode.Domain.Entities.Item", b =>
                 {
-                    b.Property<int>("IdItem")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -75,16 +75,17 @@ namespace CleanCode.Infra.Migrations
                         .HasColumnType("REAL")
                         .HasColumnName("width");
 
-                    b.HasKey("IdItem")
-                        .HasName("id_item");
+                    b.HasKey("Id")
+                        .HasName("id");
 
                     b.ToTable("items", (string)null);
                 });
 
             modelBuilder.Entity("CleanCode.Domain.Entities.Order", b =>
                 {
-                    b.Property<string>("IdOrder")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CouponCode")
                         .HasColumnType("TEXT")
@@ -102,8 +103,8 @@ namespace CleanCode.Infra.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("sequence");
 
-                    b.HasKey("IdOrder")
-                        .HasName("id_order");
+                    b.HasKey("Id")
+                        .HasName("id");
 
                     b.HasIndex("CouponCode");
 
@@ -112,16 +113,17 @@ namespace CleanCode.Infra.Migrations
 
             modelBuilder.Entity("CleanCode.Domain.Entities.OrderItem", b =>
                 {
-                    b.Property<int>("IdOrderItem")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdItem")
+                    b.Property<int>("ItemId")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("id_item");
+                        .HasColumnName("item_id");
 
-                    b.Property<string>("OrderIdOrder")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("order_id");
 
                     b.Property<double>("Price")
                         .HasColumnType("REAL")
@@ -131,10 +133,10 @@ namespace CleanCode.Infra.Migrations
                         .HasColumnType("REAL")
                         .HasColumnName("quantity");
 
-                    b.HasKey("IdOrderItem")
-                        .HasName("id_order_item");
+                    b.HasKey("Id")
+                        .HasName("id");
 
-                    b.HasIndex("OrderIdOrder");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("orderItems", (string)null);
                 });
@@ -147,54 +149,55 @@ namespace CleanCode.Infra.Migrations
 
                     b.OwnsOne("CleanCode.Domain.ValueObjects.Cpf", "Cpf", b1 =>
                         {
-                            b1.Property<string>("OrderIdOrder")
-                                .HasColumnType("TEXT");
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("INTEGER");
 
                             b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnType("TEXT")
                                 .HasColumnName("cpf");
 
-                            b1.HasKey("OrderIdOrder");
+                            b1.HasKey("OrderId");
 
                             b1.ToTable("orders");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderIdOrder");
+                                .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("CleanCode.Domain.ValueObjects.OrderCode", "Code", b1 =>
+                    b.OwnsOne("CleanCode.Domain.ValueObjects.OrderCode", "OrderCode", b1 =>
                         {
-                            b1.Property<string>("OrderIdOrder")
-                                .HasColumnType("TEXT");
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("INTEGER");
 
                             b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnType("TEXT")
                                 .HasColumnName("code");
 
-                            b1.HasKey("OrderIdOrder");
+                            b1.HasKey("OrderId");
 
                             b1.ToTable("orders");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderIdOrder");
+                                .HasForeignKey("OrderId");
                         });
-
-                    b.Navigation("Code")
-                        .IsRequired();
 
                     b.Navigation("Coupon");
 
                     b.Navigation("Cpf")
                         .IsRequired();
+
+                    b.Navigation("OrderCode");
                 });
 
             modelBuilder.Entity("CleanCode.Domain.Entities.OrderItem", b =>
                 {
                     b.HasOne("CleanCode.Domain.Entities.Order", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderIdOrder");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CleanCode.Domain.Entities.Order", b =>

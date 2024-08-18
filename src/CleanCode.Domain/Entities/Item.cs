@@ -5,17 +5,17 @@ public class Item
     public Item()
     {
     }
-    public Item(int idItem, string category, string description, int price)
+    public Item(int id, string category, string description, int price)
     {
-        IdItem = idItem;
+        Id = id;
         Category = category;
         Description = description;
         Price = price;
     }
 
-    public Item(int idItem, string category, string description, int price, int width, int height, int length, double weight) : this(idItem, category, description, price)
+    public Item(int id, string category, string description, int price, int width, int height, int length, double weight)
     {
-        IdItem = idItem;
+        Id = id;
         Category = category;
         Description = description;
         Price = price;
@@ -26,7 +26,7 @@ public class Item
     }
 
 
-    public int IdItem { get; set; }
+    public int Id { get; set; }
     public string Category { get; set; }
     public string Description { get; set; }
     public double Price { get; set; }

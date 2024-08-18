@@ -22,9 +22,9 @@ public class OrderItemRepository : IOrderItemRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<OrderItem> FindByIdAsync(int idOrderItem)
+    public async Task<OrderItem> FindByIdAsync(int id)
     {
-        return await _context.OrderItems.FirstOrDefaultAsync(o => o.IdOrderItem == idOrderItem) 
+        return await _context.OrderItems.FirstOrDefaultAsync(o => o.Id == id) 
             ?? throw new Exception("item do pedido não encontrado");
     }
 }
