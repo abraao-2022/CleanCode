@@ -33,6 +33,7 @@ public class Order
     public List<OrderItem> OrderItems { get; set; } = new();
     public DateTime Date { get; set; }
     public double Freight { get; set; }
+    public double Total { get; set; }
     public IFreightCalculator? FreightCalculator { get; set; } = new DefaultFreightCalculator();
     public OrderCode? OrderCode { get; set; }
     public int Sequence { get; set; } = 1;
@@ -44,6 +45,7 @@ public class Order
             Freight += FreightCalculator.Calculate(item) * quantity;
         }
         OrderItems.Add(new OrderItem(item.Id, item.Price, quantity));
+        Total = GetTotal();
     }
 
     public void AddCoupon(Coupon coupon)

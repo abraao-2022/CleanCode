@@ -1,21 +1,23 @@
 ﻿using CleanCode.Application.UseCase.GetOrder;
 using CleanCode.Domain.Factory;
+using CleanCode.Domain.Repositories;
 
-namespace CleanCode.Application.Query;
+namespace CleanCode.Application.UseCase.GetOrders;
 
-public class GetOrderQuery
+public class GetOrders
 {
     private readonly IRepositoryFactory _repositoryFactory;
+    private readonly IOrderRepository _orderRepository;
 
-    public GetOrderQuery(IRepositoryFactory repositoryFactory)
+    public GetOrders(IRepositoryFactory repositoryFactory)
     {
         _repositoryFactory = repositoryFactory;
+        _orderRepository = _repositoryFactory.CreateOrderRepository();
     }
 
     public async Task<GetOrderOutput> Execute(string code)
     {
-        var orderRepository = _repositoryFactory.CreateOrderRepository();
-        var order = await orderRepository.GetByCodeAsync(code);
+        var order = await _orderRepository.GetByCodeAsync(code);
         var getOrderOutput = new GetOrderOutput(order.Total, order.OrderCode.Value);
 
         return getOrderOutput;

@@ -1,4 +1,6 @@
-﻿namespace CleanCode.Application.UseCase.GetOrder;
+﻿using System.Text.Json.Serialization;
+
+namespace CleanCode.Application.UseCase.GetOrder;
 
 public class GetOrderOutput
 {
@@ -12,6 +14,9 @@ public class GetOrderOutput
         OrderCode = orderCode;
     }
 
+    [JsonPropertyName("total")]
     public double Total { get; set; }
+
+    [JsonPropertyName("orderCode")]
     public string OrderCode { get; set; }
 }

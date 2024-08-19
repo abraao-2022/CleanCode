@@ -46,6 +46,7 @@ public class DataContext : DbContext
         });
         builder.Entity<Order>().Property(o => o.Date).HasColumnName("issue_date");
         builder.Entity<Order>().Property(o => o.Freight).HasColumnName("freight");
+        builder.Entity<Order>().Property(o => o.Total).HasColumnName("total");
         builder.Entity<Order>().Property(o => o.Sequence).HasColumnName("sequence");
         builder.Entity<Order>().Ignore(o => o.FreightCalculator);
 
