@@ -15,10 +15,10 @@ public class GetOrders
         _orderRepository = _repositoryFactory.CreateOrderRepository();
     }
 
-    public async Task<GetOrderOutput> Execute(string code)
+    public async Task<GetOrdersOutput> Execute()
     {
-        var order = await _orderRepository.GetByCodeAsync(code);
-        var getOrderOutput = new GetOrderOutput(order.Total, order.OrderCode.Value);
+        var orders = await _orderRepository.FindAllAsync();
+        var getOrderOutput = new GetOrdersOutput(orders);
 
         return getOrderOutput;
     }

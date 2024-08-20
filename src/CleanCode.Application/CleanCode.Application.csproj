@@ -19,8 +19,4 @@
     <ProjectReference Include="..\CleanCode.Infra\CleanCode.Infra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCase\GetOrders\" />
-  </ItemGroup>
-
 </Project>

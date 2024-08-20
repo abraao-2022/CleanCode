@@ -7,4 +7,5 @@ public interface IOrderRepository
     Task AddAsync(Order order);
     Task<int> CountAsync();
     Task<Order> GetByCodeAsync(string code);
+    Task<List<Order>> FindAllAsync();
 }

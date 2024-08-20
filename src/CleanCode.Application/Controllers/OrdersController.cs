@@ -1,4 +1,5 @@
 ﻿using CleanCode.Application.Query;
+using CleanCode.Application.UseCase.GetOrders;
 using CleanCode.Application.UseCase.PlaceOrder;
 using CleanCode.Domain.Factory;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,15 @@ public class OrdersController : ControllerBase
     {
         var getOrder = new GetOrderQuery(_repositoryFactory);
         var output = await getOrder.Execute(code);
+
+        return Ok(output);
+    }
+    
+    [HttpGet("")]
+    public async Task<ActionResult> GetOrders()
+    {
+        var getOrders = new GetOrders(_repositoryFactory);
+        var output = await getOrders.Execute();
 
         return Ok(output);
     }
