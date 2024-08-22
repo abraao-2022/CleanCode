@@ -1,6 +1,8 @@
+using CleanCode.Domain.DAO;
 using CleanCode.Domain.Factory;
 using CleanCode.Domain.Repositories;
 using CleanCode.Infra;
+using CleanCode.Infra.DAO;
 using CleanCode.Infra.Factory;
 using CleanCode.Infra.Repositories;
 
@@ -15,6 +17,7 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+builder.Services.AddScoped<IOrderDAO, OrderDAO>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

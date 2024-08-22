@@ -20,6 +20,6 @@ public class GetOrdersTest
         var response = JsonSerializer.Deserialize<GetOrdersOutput>(jsonAsString);
         Console.WriteLine(response);
 
-        Assert.AreEqual(5, response.Orders.Count);
+        Assert.AreEqual(6, response.Orders.Count);
     }
 }

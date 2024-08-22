@@ -17,7 +17,7 @@ public class OrdersController : ControllerBase
         _repositoryFactory = repositoryFactory;
     }
 
-    [HttpPost]
+    [HttpPost("")]
     public async Task<ActionResult> PlaceOrder(PlaceOrderInput input)
     {
         var placeOrder = new PlaceOrder(_repositoryFactory);
