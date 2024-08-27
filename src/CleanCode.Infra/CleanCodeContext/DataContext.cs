@@ -13,6 +13,7 @@ public class DataContext : DbContext
     public DbSet<Coupon> Coupons { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<StockEntry> StockEntries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -56,5 +57,12 @@ public class DataContext : DbContext
         builder.Entity<OrderItem>().Property(i => i.OrderId).HasColumnName("order_id");
         builder.Entity<OrderItem>().Property(i => i.Price).HasColumnName("price");
         builder.Entity<OrderItem>().Property(i => i.Quantity).HasColumnName("quantity");
+
+        builder.Entity<StockEntry>().ToTable("stockEntry");
+        builder.Entity<StockEntry>().HasKey(s => s.Id).HasName("id");
+        builder.Entity<StockEntry>().Property(s => s.ItemId).HasColumnName("item_id");
+        builder.Entity<StockEntry>().Property(s => s.Operation).HasColumnName("operation");
+        builder.Entity<StockEntry>().Property(s => s.Quantity).HasColumnName("quantity");
+        builder.Entity<StockEntry>().Property(s => s.Date).HasColumnName("date");
     }
 }

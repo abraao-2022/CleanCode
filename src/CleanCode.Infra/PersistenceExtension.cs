@@ -13,7 +13,6 @@ public static class PersistenceExtension
 
         services.AddDbContext<DataContext>(opt => opt.UseSqlite(connectionString));
 
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
         //services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         //services.AddScoped<IProdutoRepository, ProdutoRepository>();
         //services.AddScoped<IItemListaRepository, ItemListaRepository>();

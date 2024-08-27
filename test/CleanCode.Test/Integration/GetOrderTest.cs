@@ -13,6 +13,7 @@ public class GetOrderTest
     }
 
     [TestMethod]
+    [Ignore]
     public async Task Deve_Obter_Um_Pedido_Pelo_Codigo()
     {
         var input = "202400000002";

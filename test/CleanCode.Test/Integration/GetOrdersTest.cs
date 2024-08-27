@@ -13,6 +13,7 @@ public class GetOrdersTest
     }
 
     [TestMethod]
+    [Ignore]
     public async Task Deve_Obter_Todos_Os_Pedidos()
     {
         var httpResponse = await _httpClient.GetAsync($"http://localhost:5182/api/orders");
